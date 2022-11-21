@@ -93,6 +93,22 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'mongodb_dsn' => [
+            'driver' => 'mongodb',
+            'dsn' => env('DB_DSN'),
+            'database' => env('DB_DATABASE', 'homestead'),
+        ],
+        'mongodb' => [
+            'driver' => 'mongodb',
+            'uri' => "mongodb://".env('DB_HOST').":".env('DB_PORT')."/".env('DB_DATABASE'),
+            'uriOptions' => [
+                'username' => env('DB_USERNAME'),
+                'password' => env('DB_PASSWORD'),
+                'readPreference' => 'primary',
+                'serverSelectionTryOnce' => false
+            ]
+        ]
+
     ],
 
     /*
@@ -145,6 +161,7 @@ return [
             'port' => env('REDIS_PORT', '6379'),
             'database' => env('REDIS_CACHE_DB', '1'),
         ],
+
 
     ],
 
