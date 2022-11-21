@@ -14,9 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $data = \Illuminate\Support\Facades\DB::connection('mongodb_dsn')->table('dt_users')->get();
-    dd($data);
-    $user = \App\Models\User::query();
-    dd($user->get());
-    return view('welcome');
+    return view('welcome2');
 });

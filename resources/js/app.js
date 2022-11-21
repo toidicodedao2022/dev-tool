@@ -1,1 +1,4 @@
-import './bootstrap';
+class App {
+
+}
+export default App

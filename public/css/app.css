@@ -1,0 +1,32 @@
+.text-white {
+  color: white;
+}
+
+.text-green {
+  color: #89DB6D;
+}
+
+body {
+  margin: 0 auto;
+  background-color: #0F2242;
+  overflow-x: hidden;
+}
+
+#landing-page {
+  width: 100%;
+  height: 100%;
+}
+#landing-page header img {
+  min-width: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#landing-page .slogan {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: auto;
+  width: 90%;
+}
