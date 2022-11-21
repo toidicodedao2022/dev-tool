@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    echo phpinfo();
-    die();
+    $user = \App\Models\User::query();
+    dd($user->get());
     return view('welcome');
 });
