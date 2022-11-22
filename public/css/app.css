@@ -10823,6 +10823,11 @@ textarea.form-control-lg {
   width: 30%;
 }
 
+img.object-fit-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 .blog-header {
   line-height: 1;
   border-bottom: 1px solid #e5e5e5;

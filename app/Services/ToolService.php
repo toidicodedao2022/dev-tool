@@ -2,13 +2,16 @@
 
 namespace App\Services;
 
+use App\Repositories\AttachmentRepository;
+use App\Repositories\ToolRepository;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class ToolService
 {
-    public function __construct()
+    public function __construct(protected ToolRepository $toolRepository,protected AttachmentRepository $attachmentRepository)
     {
+
     }
 
     /**
@@ -60,5 +63,25 @@ class ToolService
         ])->only($options)->join('');
         $lengthChars = mb_strlen($chars);
 
+    }
+
+    public function listTool(): array
+    {
+        return $this->toolRepository->find([
+            '_id' => [
+                '$exists' => true
+            ]
+        ])->map(function ($tool){
+            /** @var \App\Models\Tool $tool */
+            return [
+                'name' => $tool->name,
+                'image' => $this->attachmentRepository->getUrlById($tool->attachment_oid),
+                'short_content'=>  mb_strimwidth($tool->short_content ?? '', 0, 100, "..."),
+                'tag' => $tool->tags,
+                'count_like' => 10,
+                'router_name' => $tool->router_name ?? '',
+                'count_share' => 20
+            ];
+        })->toArray();
     }
 }

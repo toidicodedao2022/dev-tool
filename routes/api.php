@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/', function () {
-    $get = \Illuminate\Support\Facades\Http::get("http://dym-job-dev.ap-southeast-1.elasticbeanstalk.com/search/129");
-    dd($get);
-    return view('welcome2');
+Route::post('/upload-image', function (Request $request) {
+    $upload = $request->file('file')->store('avatars/123','s3');
+    dd($upload);
+    $upload = \Illuminate\Support\Facades\Storage::disk('s3')->put("dangtinh.png","file content");
+    dd($upload);
 });

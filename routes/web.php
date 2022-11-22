@@ -13,9 +13,7 @@ use App\Http\Controllers\ToolController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-
-})->name('web.dashboard');
+Route::get('/', [ToolController::class,'index'])->name('web.dashboard');
 Route::name('tool.')->prefix('tools')->group(function (){
     Route::get('/',[ToolController::class,'index'])->name('index');
     Route::get('/md5',[ToolController::class,'md5'])->name('md5');

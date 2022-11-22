@@ -14,6 +14,22 @@ class App {
         });
         return output;
     }
+
+    uploadFile(file,type=""){
+        const urlUpload = configUrls.upload_file || '';
+        if(!urlUpload){
+            return alert("error url upload!")
+        }
+        let formData = new FormData()
+        formData.append('file',file)
+        formData.append('type',type)
+        return new Promise((resolve)=>{
+            axios.post(urlUpload,formData).then(res=>{
+                return resolve(res.data)
+            })
+        })
+
+    }
 }
 export default App
 

@@ -34,13 +34,13 @@ use Illuminate\Support\Arr;
                                 <i class="fa fa-share-alt" aria-hidden="true"></i>
                                 {{Arr::get($tool,'count_share')}}
                             </span>
-                            <a href="{{route(Arr::get($tool,'route_name'))}}" class="btn btn-sm btn-primary">
+                            <a href="{{route(Arr::get($tool,'router_name'))}}" class="btn btn-sm btn-primary">
                                 USE
                             </a>
                         </span>
                     </div>
                     <div class="col-auto d-none d-lg-block w-30">
-                        <img class="=rounded" alt="{{Arr::get($tool,'name')}}" width="100%" height="100%" src="{{Arr::get($tool,'image')}}">
+                        <img class="rounded object-fit-contain" alt="{{Arr::get($tool,'name')}}" width="100%" height="100%" src="{{Arr::get($tool,'image')}}">
                     </div>
                 </div>
             </div>
