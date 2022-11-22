@@ -19,13 +19,92 @@ class ToolController extends Controller
      */
     public function index(): View
     {
-        return view('tool.index');
+        $tools = [
+            [
+                'name' => 'MD5',
+                'image' => 'https://4.imimg.com/data4/XH/FE/MY-310713/nr_0032_62x49-1000x1000.jpg',
+                'short_content'=>'text ngan',
+                'tag' => [
+                    '1233','234'
+                ],
+                'count_like' => 10,
+                'route_name' => 'tool.md5',
+                'count_share' => 20
+            ],
+            [
+                'name' => 'MD5',
+                'image' => 'https://cdn-icons-png.flaticon.com/512/2720/2720641.png',
+                'short_content'=>'text ngan',
+                'tag' => [
+                    '1233','234'
+                ],
+                'count_like' => 10,
+                'route_name' => 'tool.md5',
+                'count_share' => 20
+            ],
+            [
+                'name' => 'MD5',
+                'image' => 'https://cdn-icons-png.flaticon.com/512/2720/2720641.png',
+                'short_content'=>'text ngan',
+                'tag' => [
+                    '1233','234'
+                ],
+                'count_like' => 10,
+                'route_name' => 'tool.md5',
+                'count_share' => 20
+            ],
+            [
+                'name' => 'MD5',
+                'image' => 'https://cdn-icons-png.flaticon.com/512/2720/2720641.png',
+                'short_content'=>'text ngan',
+                'tag' => [
+                    '1233','234'
+                ],
+                'count_like' => 10,
+                'route_name' => 'tool.md5',
+                'count_share' => 20
+            ],
+            [
+                'name' => 'MD5',
+                'image' => 'https://cdn-icons-png.flaticon.com/512/2720/2720641.png',
+                'short_content'=>'text ngan',
+                'tag' => [
+                    '1233','234'
+                ],
+                'count_like' => 10,
+                'route_name' => 'tool.md5',
+                'count_share' => 20
+            ],
+            [
+                'name' => 'MD5',
+                'image' => 'https://cdn-icons-png.flaticon.com/512/2720/2720641.png',
+                'short_content'=>'text ngan',
+                'tag' => [
+                    '1233','234'
+                ],
+                'count_like' => 10,
+                'route_name' => 'tool.md5',
+                'count_share' => 20
+            ],
+            [
+                'name' => 'MD5',
+                'image' => 'https://cdn-icons-png.flaticon.com/512/2720/2720641.png',
+                'short_content'=>'text ngan',
+                'tag' => [
+                    '1233','234'
+                ],
+                'count_like' => 10,
+                'route_name' => 'tool.md5',
+                'count_share' => 20
+            ]
+        ];
+        return view('tool.index',compact('tools'));
     }
 
     public function md5(Request $request): JsonResponse|View
     {
         if ($request->expectsJson()) {
-            $output = $this->toolService->md5($request->get("key"));
+            $output = $this->toolService->md5($request->get("input"));
 
             return response()->json((new ResponseSuccess([
                 'result' => $output
@@ -51,5 +130,22 @@ class ToolController extends Controller
         }
 
         return view('tool.base64');
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
+    public function random(Request $request): JsonResponse|View
+    {
+        if ($request->getMethod() === "POST") {
+            $output = $this->toolService->random($request->all(['chars', 'length']));
+
+            return response()->json((new ResponseSuccess([
+                'result' => $output
+            ]))->toArray());
+        }
+        return view('tool.random');
     }
 }

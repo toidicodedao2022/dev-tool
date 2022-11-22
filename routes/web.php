@@ -1,7 +1,8 @@
 <?php
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ToolController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 
 })->name('web.dashboard');
-Route::group(['prefix'=>'tools'],function (){
-    Route::get('/',[\App\Http\Controllers\ToolController::class,'index']);
-    Route::get('/md5',[\App\Http\Controllers\ToolController::class,'md5'])->name('md5');
-    Route::get('/base64',[\App\Http\Controllers\ToolController::class,'base64'])->name('base64');
-})->name('tool.');
+Route::name('tool.')->prefix('tools')->group(function (){
+    Route::get('/',[ToolController::class,'index'])->name('index');
+    Route::get('/md5',[ToolController::class,'md5'])->name('md5');
+    Route::get('/base64',[ToolController::class,'base64'])->name('base64');
+    Route::get('/random',[ToolController::class,'random'])->name('random');
+    Route::post('/random',[ToolController::class,'random'])->name('random.post');
+});

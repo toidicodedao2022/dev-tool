@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+
 class ToolService
 {
     public function __construct()
@@ -31,5 +34,31 @@ class ToolService
         }
 
         return base64_encode($str);
+    }
+
+    /**
+     * @param array $params
+     *
+     * @return string
+     */
+    public function random(array $params): string
+    {
+        $options = (array)Arr::get($params,'chars',[]);
+        if(count($options)==0){
+            return '';
+        }
+        $length = abs((int)Arr::get($params,'length',1));
+        if($length<1){
+            return '';
+        }
+
+        $chars = collect([
+            'a_z' => 'abcdefghijklmnopqrstuvwxyz',
+            'A_Z' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            '0_9' => range(0,9),
+            'special' => '!@#$%^&*()+'
+        ])->only($options)->join('');
+        $lengthChars = mb_strlen($chars);
+
     }
 }
