@@ -104,8 +104,7 @@ class ToolController extends Controller
     public function md5(Request $request): JsonResponse|View
     {
         if ($request->expectsJson()) {
-            $output = $this->toolService->md5($request->get("input"));
-
+            $output = $this->toolService->md5((string)$request->get("input"));
             return response()->json((new ResponseSuccess([
                 'result' => $output
             ]))->toArray());

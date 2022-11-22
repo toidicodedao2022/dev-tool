@@ -1,7 +1,7 @@
 version: '3'
 services:
-  wcm_webservice:
-    container_name: "wcm_webservice"
+  dt_webservice:
+    container_name: "dt_webservice"
     image: nginx:latest
     working_dir: /var/www/html
     volumes:
@@ -12,8 +12,8 @@ services:
       - '443:443'
     networks:
       - app-networks
-  wcm_php:
-    container_name: "wcm_php"
+  dt_php:
+    container_name: "dt_php"
     build:
       context: ./php
       dockerfile: Dockerfile

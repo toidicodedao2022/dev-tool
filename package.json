@@ -1,18 +1,19 @@
 {
   "private": true,
   "scripts": {
-    "dev": "npx watch mix",
+    "dev": "npx mix watch",
     "build": "npx mix"
   },
   "devDependencies": {
-    "axios": "^1.1.2",
+    "axios": "^1.1.3",
     "laravel-mix": "^6.0.49",
     "laravel-vite-plugin": "^0.6.0",
     "lodash": "^4.17.19",
     "postcss": "^8.1.14",
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.56.1",
-    "vite": "^3.0.0"
+    "vite": "^3.0.0",
+    "http": "^0.0.1-security"
   },
   "name": "whatscallme",
   "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\" alt=\"Laravel Logo\"></a></p>",
@@ -29,6 +30,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^18.11.9",
+    "bootstrap": "^5.2.3",
+    "http": "^0.0.1-security",
     "jquery": "^3.6.1",
     "postcss-import": "^15.0.0",
     "sass-loader": "^13.2.0"
