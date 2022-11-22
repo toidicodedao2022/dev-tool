@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+    "dev": "npx watch mix",
+    "build": "npx mix"
   },
   "devDependencies": {
     "axios": "^1.1.2",
@@ -29,6 +29,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jquery": "^3.6.1",
     "postcss-import": "^15.0.0",
     "sass-loader": "^13.2.0"
   }
