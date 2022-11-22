@@ -4,5 +4,5 @@ namespace App\Http\Responses;
 
 interface CanResponse
 {
-    public function response();
+    public function toArray();
 }

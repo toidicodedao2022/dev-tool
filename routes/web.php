@@ -18,4 +18,5 @@ Route::get('/', function () {
 Route::group(['prefix'=>'tools'],function (){
     Route::get('/',[\App\Http\Controllers\ToolController::class,'index']);
     Route::get('/md5',[\App\Http\Controllers\ToolController::class,'md5'])->name('md5');
+    Route::get('/base64',[\App\Http\Controllers\ToolController::class,'base64'])->name('base64');
 })->name('tool.');

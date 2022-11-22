@@ -4,18 +4,20 @@ namespace App\Http\Responses;
 
 class ApiResponse implements CanResponse
 {
-    public int $status;
-    public string $content;
-    public array $data;
+    public function __construct(public int $status,public string $content, public array $data)
+    {
+
+    }
+
     /**
      * @return array
      */
-    public function response(): array
+    public function toArray(): array
     {
         return [
             'status' => $this->status,
             'content' => $this->content,
-            'data' => (object)$this->data
+            'data' => $this->data
         ];
     }
 }
