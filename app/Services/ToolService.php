@@ -76,7 +76,7 @@ class ToolService
             return [
                 'name' => $tool->name,
                 'image' => $this->attachmentRepository->getUrlById($tool->attachment_oid),
-                'short_content'=>  mb_strimwidth($tool->short_content ?? '', 0, 100, "..."),
+                'short_content'=>  Str::limit($tool->short_content ?? '',20,"..."),
                 'tag' => $tool->tags,
                 'count_like' => 10,
                 'router_name' => $tool->router_name ?? '',
