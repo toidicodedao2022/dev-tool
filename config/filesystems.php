@@ -46,8 +46,8 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID','AKIATJH6T6TM42RDWNFH'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY','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'),
+            'key' => env('AWS_ACCESS_KEY_ID',''),
+            'secret' => env('AWS_SECRET_ACCESS_KEY',''),
             'region' => env('AWS_DEFAULT_REGION','ap-southeast-1'),
             'bucket' => env('AWS_BUCKET','dev-tool-storage'),
             'url' => env('AWS_URL'),
