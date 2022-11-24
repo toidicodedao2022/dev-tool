@@ -46,23 +46,36 @@ class ToolService
      */
     public function random(array $params): string
     {
-        $options = (array)Arr::get($params,'chars',[]);
-        if(count($options)==0){
+        $options = (array)Arr::get($params, 'chars', []);
+        if (count($options) == 0) {
             return '';
         }
-        $length = abs((int)Arr::get($params,'length',1));
-        if($length<1){
+        $length = abs((int)Arr::get($params, 'length', 0));
+        if ($length < 1) {
             return '';
         }
-
+        $notDuplicate = Arr::get($params, 'same', '') === "not_duplicate";
         $chars = collect([
             'a_z' => 'abcdefghijklmnopqrstuvwxyz',
             'A_Z' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-            '0_9' => range(0,9),
-            'special' => '!@#$%^&*()+'
+            '0_9' => '0123456789',
+            'symbols' => '!@#$%^&*()+'
         ])->only($options)->join('');
-        $lengthChars = mb_strlen($chars);
+        $countChars = Str::length($chars);
+        if ($notDuplicate) {
+            $array = str_split($chars);
+            $shuffle = Arr::shuffle($array);
+            $str = Arr::join($shuffle, '');
 
+            return Str::substr($str, 0, $length);
+        }
+        $text = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $text .= $chars[rand(0, $countChars - 1)];
+        }
+
+        return $text;
     }
 
     public function listTool(): array
@@ -76,7 +89,7 @@ class ToolService
             return [
                 'name' => $tool->name,
                 'image' => $this->attachmentRepository->getUrlById($tool->attachment_oid),
-                'short_content'=>  Str::limit($tool->short_content ?? '',20,"..."),
+                'short_content'=>  Str::limit($tool->short_content ?? '',100,"..."),
                 'tag' => $tool->tags,
                 'count_like' => 10,
                 'router_name' => $tool->router_name ?? '',

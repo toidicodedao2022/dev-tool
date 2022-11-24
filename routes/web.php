@@ -21,3 +21,11 @@ Route::name('tool.')->prefix('tools')->group(function (){
     Route::get('/random',[ToolController::class,'random'])->name('random');
     Route::post('/random',[ToolController::class,'random'])->name('random.post');
 });
+Route::get('/test',function (){
+   $key = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()+0123456789";
+   $array = str_split($key);
+   $shuffle = Arr::shuffle($array);
+   $str = Arr::join($shuffle,'');
+   $str = substr($str,0,15);
+   dd($str);
+});

@@ -62,7 +62,7 @@ class ToolController extends Controller
     public function random(Request $request): JsonResponse|View
     {
         if ($request->getMethod() === "POST") {
-            $output = $this->toolService->random($request->all(['chars', 'length']));
+            $output = $this->toolService->random($request->all(['chars', 'length','same']));
 
             return response()->json((new ResponseSuccess([
                 'result' => $output

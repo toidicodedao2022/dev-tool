@@ -1,6 +1,6 @@
 window.$ = require('jquery')
 import axios from "axios";
-window.axios =axios
+window.axios = axios
 axios.defaults.headers.common['gmt'] = - new Date().getTimezoneOffset();
 class App {
     constructor() {
@@ -28,7 +28,13 @@ class App {
                 return resolve(res.data)
             })
         })
-
+    }
+    showToaster(text){
+        const snack = $('#snackbar');
+        snack.addClass('show').html(text)
+        setTimeout(function (){
+            snack.removeClass('show')
+        },3000)
     }
 }
 export default App
