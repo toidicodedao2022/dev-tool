@@ -20,7 +20,8 @@ class YoutubeSuggestController extends Controller
     public function getByKeyWord(Request $request): JsonResponse
     {
         $encode = urlencode((string)$request->get('q', ''));
-        $url = "https://suggestqueries.google.com/complete/search?json=suggestCallBack&q={$encode}&hl=en&ds=yt&client=youtube&_=1669363147310&output=toolbar";
+        $time= time()*1000;
+        $url = "https://suggestqueries.google.com/complete/search?json=suggestCallBack&q={$encode}&hl=en&ds=yt&client=youtube&_={$time}&output=toolbar";
         $data = json_decode(utf8_encode(Http::get($url)->body()), true);
         $output = Arr::get($data, 1);
 
