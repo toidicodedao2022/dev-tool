@@ -1,10 +1,19 @@
 <?php
 
 namespace App\Http\Responses;
-
-class ApiResponse implements CanResponse
+/**
+ * @property int $status
+ * @property string $content
+ * @property array $data
+ */
+abstract class ApiResponse
 {
-    public function __construct(public int $status,public string $content, public array $data)
+    /**
+     * @param int    $status
+     * @param string $content
+     * @param array  $data
+     */
+    public function __construct(protected int $status,protected string $content, protected array $data=[])
     {
 
     }
@@ -17,7 +26,7 @@ class ApiResponse implements CanResponse
         return [
             'status' => $this->status,
             'content' => $this->content,
-            'data' => $this->data
+            'data' => (object)$this->data
         ];
     }
 }

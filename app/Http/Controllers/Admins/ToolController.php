@@ -16,10 +16,6 @@ class ToolController extends Controller
     {
     }
 
-    public function index(){
-
-    }
-
     /**
      * @return \Illuminate\View\View
      */
@@ -29,7 +25,7 @@ class ToolController extends Controller
         $routes = array_filter($routers, function ($route) {
             /** @var \Illuminate\Routing\Route $route */
 
-            return str_starts_with($route->getName(), "tool.");
+            return str_starts_with((string)$route->getName(), "tool.");
         });
         $names = array_map(function ($route) {
             /** @var \Illuminate\Routing\Route $route */

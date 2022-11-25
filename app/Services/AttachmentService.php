@@ -19,9 +19,9 @@ class AttachmentService
     /**
      * @param \Illuminate\Http\File|null $file
      *
-     * @return \App\Http\Responses\ApiResponse|null
+     * @return \App\Http\Responses\ApiResponse
      */
-    public function store(?UploadedFile $file): ?ApiResponse
+    public function store(?UploadedFile $file): ApiResponse
     {
         if (!$file instanceof UploadedFile) {
             return new ResponseError();

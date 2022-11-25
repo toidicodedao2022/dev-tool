@@ -27,7 +27,9 @@ class ToolController extends Controller
     public function md5(Request $request): JsonResponse|View
     {
         if ($request->expectsJson()) {
-            $output = $this->toolService->md5((string)$request->get("input"));
+            /** @var string $key */
+            $key = $request->get('input','');
+            $output = $this->toolService->md5((string)$key);
             return response()->json((new ResponseSuccess([
                 'result' => $output
             ]))->toArray());
@@ -44,7 +46,11 @@ class ToolController extends Controller
     public function base64(Request $request): JsonResponse|View
     {
         if ($request->expectsJson()) {
-            $output = $this->toolService->base64((string)$request->get("input"), (string)$request->get('type'));
+            /** @var string $input */
+            $input = $request->get("input", '');
+            /** @var string $type */
+            $type = $request->get('type', '');
+            $output = $this->toolService->base64((string)$input, (string)$type);
 
             return response()->json((new ResponseSuccess([
                 'result' => $output
@@ -62,12 +68,13 @@ class ToolController extends Controller
     public function random(Request $request): JsonResponse|View
     {
         if ($request->getMethod() === "POST") {
-            $output = $this->toolService->random($request->all(['chars', 'length','same']));
+            $output = $this->toolService->random($request->all(['chars', 'length', 'same']));
 
             return response()->json((new ResponseSuccess([
                 'result' => $output
             ]))->toArray());
         }
+
         return view('tool.random');
     }
 }

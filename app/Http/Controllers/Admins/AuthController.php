@@ -25,7 +25,7 @@ class AuthController extends Controller
     /**
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Support\Facades\Redirect|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function attempt(Request $request): RedirectResponse|View
     {

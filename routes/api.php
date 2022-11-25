@@ -14,18 +14,5 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('/upload-image', function (Request $request) {
-    $upload = $request->file('file')->store('avatars/123','s3');
-    dd($upload);
-    $upload = \Illuminate\Support\Facades\Storage::disk('s3')->put("dangtinh.png","file content");
-    dd($upload);
-});
-Route::get('/search-ytb',function (Request $request){
-    $encode = urlencode((string)$request->get('q',''));
-    $url ="https://suggestqueries.google.com/complete/search?json=suggestCallBack&q={$encode}&hl=en&ds=yt&client=youtube&_=1669363147310&output=toolbar";
-    $data = json_decode(utf8_encode(Http::get($url)->body()),true);
-    $output = \Illuminate\Support\Arr::get($data,1);
-    return response()->json((new \App\Http\Responses\ResponseSuccess([
-        'result' => $output
-    ]))->toArray());
-});
+
+Route::get('/search-ytb',[\App\Http\Controllers\Apis\YoutubeSuggestController::class,'getByKeyWord']);
