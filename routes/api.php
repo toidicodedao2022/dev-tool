@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/search-ytb',[\App\Http\Controllers\Apis\YoutubeSuggestController::class,'getByKeyWord'])->middleware(['throttle:none']);
+Route::get('/search-ytb',[\App\Http\Controllers\Apis\YoutubeSuggestController::class,'getByKeyWord'])->middleware(['throttle:500,1']);
