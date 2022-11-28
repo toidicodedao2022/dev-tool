@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Apis;
 
 use App\Http\Controllers\Controller;
 use App\Http\Responses\ApiResponse;
+use App\Http\Responses\ResponseError;
 use App\Http\Responses\ResponseSuccess;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -34,5 +35,36 @@ class YoutubeSuggestController extends Controller
         return response()->json((new ResponseSuccess([
             'result' => (array)$output
         ]))->toArray());
+    }
+
+    public function searchListByKeyword(Request $request)
+    {
+        //https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=%C4%91i%20v%E1%BB%81%20nh%C3%A0&type=video&key=AIzaSyBZ-ATWMq2EfmUPnooBX81H8Ya9Tekam1M
+
+        $encode = (string)$request->get('q', '');
+
+        $isEncoded = preg_match('~%[0-9A-F]{2}~i', $encode);
+        if (!$isEncoded) {
+            $encode = urlencode($encode);
+        }
+        $url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q={$encode}&type=video&key=".config('google.api_key_youtube');
+        $response = Http::get($url)->json();
+        if(Arr::exists($response,'error.code')){
+            $code = (int)Arr::get($response,'error.code');
+            return response()->json((new ResponseError($code,"api error!"))->toArray());
+        }
+        $region = (string)Arr::get($response,'regionCode','');
+        $items = (array)Arr::get($response,'items',[]);
+        $items = Arr::map($items,function ($item){
+            /** @var array $item */
+            return [
+                'video_id' => Arr::get($item,'id.videoId',''),
+                'title' => Arr::get($item,'snippet.title',''),
+                'url' => Arr::get($item,'snippet.thumbnails.high.url','')
+            ];
+        });
+        return response()->json((new ResponseSuccess([
+            'list' => $items
+        ],"country: {$region}")));
     }
 }

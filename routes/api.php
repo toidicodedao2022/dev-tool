@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/search-ytb',[\App\Http\Controllers\Apis\YoutubeSuggestController::class,'getByKeyWord']);
+Route::get('/search-list-video',[\App\Http\Controllers\Apis\YoutubeSuggestController::class,'searchListByKeyword']);
