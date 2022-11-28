@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   dt_webservice:
     container_name: "dt_webservice"
