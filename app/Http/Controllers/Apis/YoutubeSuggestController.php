@@ -69,9 +69,7 @@ class YoutubeSuggestController extends Controller
             return [
                 'video_id' => (string)Arr::get($item, 'id.videoId', ''),
                 'title' => (string)Arr::get($item, 'snippet.title', ''),
-                'image' => [
-                    'url' => $imageHigh
-                ],
+                'image' => $imageHigh,
                 'channel_title' => (string)Arr::get($item, 'channelTitle', '')
             ];
         });
