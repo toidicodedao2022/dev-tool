@@ -73,6 +73,6 @@ class YoutubeSuggestController extends Controller
 
         return response()->json((new ResponseSuccess([
             'list' => $items
-        ], "country: {$region}"))->toArray());
+        ], "country: {$region}",count($items) ? 200 : 204))->toArray());
     }
 }
