@@ -42,7 +42,7 @@ class YoutubeSuggestController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function searchListByKeyword(Request $request):JsonResponse
+    public function searchListByKeyword(Request $request): JsonResponse
     {
         //https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=%C4%91i%20v%E1%BB%81%20nh%C3%A0&type=video&key=AIzaSyBZ-ATWMq2EfmUPnooBX81H8Ya9Tekam1M
 
@@ -65,14 +65,15 @@ class YoutubeSuggestController extends Controller
         $items = Arr::map($items, function ($item) {
             /** @var array $item */
             return [
-                'video_id' => Arr::get($item, 'id.videoId', ''),
-                'title' => Arr::get($item, 'snippet.title', ''),
-                'image' => Arr::get($item, 'snippet.thumbnails.high.url', '')
+                'video_id' => (string)Arr::get($item, 'id.videoId', ''),
+                'title' => (string)Arr::get($item, 'snippet.title', ''),
+                'image' => (string)Arr::get($item, 'snippet.thumbnails.high.url', ''),
+                'channel_title' => (string)Arr::get($item, 'channelTitle', '')
             ];
         });
 
         return response()->json((new ResponseSuccess([
             'list' => $items
-        ], "country: {$region}",count($items) ? 200 : 204))->toArray());
+        ], "country: {$region}", count($items) ? 200 : 204))->toArray());
     }
 }
