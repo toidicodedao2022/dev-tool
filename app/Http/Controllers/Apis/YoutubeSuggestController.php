@@ -63,11 +63,15 @@ class YoutubeSuggestController extends Controller
         $region = (string)Arr::get($response, 'regionCode', '');
         $items = (array)Arr::get($response, 'items', []);
         $items = Arr::map($items, function ($item) {
+            $imageHigh = (array)Arr::get($item, 'snippet.thumbnails.high', []);
+
             /** @var array $item */
             return [
                 'video_id' => (string)Arr::get($item, 'id.videoId', ''),
                 'title' => (string)Arr::get($item, 'snippet.title', ''),
-                'image' => (string)Arr::get($item, 'snippet.thumbnails.high.url', ''),
+                'image' => [
+                    'url' => $imageHigh
+                ],
                 'channel_title' => (string)Arr::get($item, 'channelTitle', '')
             ];
         });
