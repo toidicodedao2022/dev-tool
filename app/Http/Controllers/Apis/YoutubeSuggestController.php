@@ -37,7 +37,12 @@ class YoutubeSuggestController extends Controller
         ]))->toArray());
     }
 
-    public function searchListByKeyword(Request $request)
+    /**
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function searchListByKeyword(Request $request):JsonResponse
     {
         //https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=%C4%91i%20v%E1%BB%81%20nh%C3%A0&type=video&key=AIzaSyBZ-ATWMq2EfmUPnooBX81H8Ya9Tekam1M
 
@@ -47,24 +52,27 @@ class YoutubeSuggestController extends Controller
         if (!$isEncoded) {
             $encode = urlencode($encode);
         }
-        $url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q={$encode}&type=video&key=".config('google.api_key_youtube');
+        $url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q={$encode}&type=video&key="
+            .config('google.api_key_youtube');
         $response = Http::get($url)->json();
-        if(Arr::exists($response,'error.code')){
-            $code = (int)Arr::get($response,'error.code');
-            return response()->json((new ResponseError($code,"api error!"))->toArray());
+        if (Arr::exists($response, 'error.code')) {
+            $code = (int)Arr::get($response, 'error.code');
+
+            return response()->json((new ResponseError($code, "api error!"))->toArray());
         }
-        $region = (string)Arr::get($response,'regionCode','');
-        $items = (array)Arr::get($response,'items',[]);
-        $items = Arr::map($items,function ($item){
+        $region = (string)Arr::get($response, 'regionCode', '');
+        $items = (array)Arr::get($response, 'items', []);
+        $items = Arr::map($items, function ($item) {
             /** @var array $item */
             return [
-                'video_id' => Arr::get($item,'id.videoId',''),
-                'title' => Arr::get($item,'snippet.title',''),
-                'url' => Arr::get($item,'snippet.thumbnails.high.url','')
+                'video_id' => Arr::get($item, 'id.videoId', ''),
+                'title' => Arr::get($item, 'snippet.title', ''),
+                'url' => Arr::get($item, 'snippet.thumbnails.high.url', '')
             ];
         });
+
         return response()->json((new ResponseSuccess([
             'list' => $items
-        ],"country: {$region}")));
+        ], "country: {$region}")));
     }
 }
