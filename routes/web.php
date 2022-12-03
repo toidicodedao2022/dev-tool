@@ -20,6 +20,7 @@ Route::name('tool.')->prefix('tools')->group(function (){
     Route::get('/base64',[ToolController::class,'base64'])->name('base64');
     Route::get('/random',[ToolController::class,'random'])->name('random');
     Route::post('/random',[ToolController::class,'random'])->name('random.post');
+//    Route::get('pixel-to-sdp',)
 });
 Route::get('/test',function (){
    $key = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()+0123456789";
