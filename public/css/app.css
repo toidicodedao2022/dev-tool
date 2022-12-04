@@ -11001,3 +11001,18 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+#convert-pixel {
+  background: linear-gradient(180deg, #0F2242 0%, #000000 100%) no-repeat center center fixed;
+  background-size: cover;
+}
+#convert-pixel .container {
+  color: white;
+}
+#convert-pixel .result {
+  border-radius: 30px;
+}
+#convert-pixel .result p {
+  font-size: 3rem;
+  color: #C49E37;
+}

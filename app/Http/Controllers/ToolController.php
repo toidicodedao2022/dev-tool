@@ -77,4 +77,12 @@ class ToolController extends Controller
 
         return view('tool.random');
     }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function pixelToSdp(): View
+    {
+        return view('tool.pixel-to-sdp');
+    }
 }

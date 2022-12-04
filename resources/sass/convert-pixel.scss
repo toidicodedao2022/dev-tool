@@ -1,0 +1,18 @@
+#convert-pixel{
+    background: linear-gradient(180deg, #0F2242 0%, #000000 100%)  no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    .container{
+        color: white;
+    }
+
+    .result{
+        border-radius: 30px;
+        p{
+            font-size: 3rem;
+            color: #C49E37;
+        }
+    }
+}

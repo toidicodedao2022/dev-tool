@@ -36,6 +36,14 @@ class App {
             snack.removeClass('show')
         },3000)
     }
+
+    setDataStorage(key,value){
+        window.localStorage.setItem(`dev_tool_${key}`,value)
+    }
+
+    getStorage(key){
+        return window.localStorage.getItem(`dev_tool_${key}`) ?? ''
+    }
 }
 export default App
 

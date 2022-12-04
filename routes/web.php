@@ -13,14 +13,17 @@ use App\Http\Controllers\ToolController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [ToolController::class,'index'])->name('web.dashboard');
+//Route::get('/', [ToolController::class,'index'])->name('web.dashboard');
+Route::get('/',function (){
+    return \Illuminate\Support\Facades\Redirect::route('tool.pixel-to-sdp');
+});
 Route::name('tool.')->prefix('tools')->group(function (){
     Route::get('/',[ToolController::class,'index'])->name('index');
     Route::get('/md5',[ToolController::class,'md5'])->name('md5');
     Route::get('/base64',[ToolController::class,'base64'])->name('base64');
     Route::get('/random',[ToolController::class,'random'])->name('random');
     Route::post('/random',[ToolController::class,'random'])->name('random.post');
-//    Route::get('pixel-to-sdp',)
+    Route::get('/pixel-to-sdp',[ToolController::class,'pixelToSdp'])->name('pixel-to-sdp');
 });
 Route::get('/test',function (){
    $key = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()+0123456789";
